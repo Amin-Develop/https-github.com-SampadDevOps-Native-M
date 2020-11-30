@@ -1,0 +1,45 @@
+﻿@page
+@model Api.Pages.IndexModel
+@{Layout = "_Layout"; }
+
+<div id='tool-box'>
+    <button id='clear-history-button' class='toolbox-item no-outline font-icon hover-red' title='Ctrl + Delete' onclick='clearHistory()'>&#xE74D;</button>
+    <button id='change-theme-button' class='toolbox-item no-outline font-icon hover-green' title='Ctrl + Alt + T' onclick='Theme.changeTheme()'>&#xF08C;</button>
+    <select id="ids"></select>
+    <button id='show-contacts-button' class='toolbox-item no-outline font-icon hover-blue' title='Ctrl + Alt + C' onclick='OCContacts()'>&#xE8D4;</button>
+</div>
+
+<div id='main-wrapper'>
+    <div id='main'>
+
+    </div>
+</div>
+
+<div id='message-box'>
+    <button class='font-icon no-outline hover-dodgerblue' id='sticker' title='Ctrl + Alt + S' onclick='OCStickerBox()'>&#xF4AA;</button>
+    <textarea name='message' rows='1' placeholder='پیامی بنویسید ...'></textarea>
+    <button class='font-icon no-outline hover-dodgerblue' id='send-message' title='Ctrl + Enter' onclick='sendMessage()'>&#xE725;</button>
+</div>
+
+<div id='contacts-wrapper' style='display: none'>
+    <div id='contacts'>
+
+    </div>
+</div>
+
+<div id='sticker-picker-wrapper' style='display: none'>
+    <div class='title'>پایتخت</div>
+    <div class='sticker-picker'>
+        @foreach (var sticker in Model.paytakhtStickers)
+        {
+            <img src='/stickers/paytakht/@sticker.Name' alt='sticker' class='sticker' onclick='sendSticker("paytakht","@sticker.Name")'>
+        }
+    </div>
+    <div class='title'>متفرقه</div>
+    <div class='sticker-picker'>
+        @foreach (var stciker in Model.otherStickers)
+        {
+            <img src='/stickers/other/@stciker.Name' alt='sticker' class='sticker' onclick='sendSticker("@stciker.Name")'>
+        }
+    </div>
+</div>
